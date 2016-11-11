@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<title>Spring Security - REST API</title>
+<script src="https://code.angularjs.org/1.2.29/angular.js"></script>
+<script src="https://code.angularjs.org/1.2.29/angular-cookies.js"></script>
+<script>
+	var myApp = angular.module('myApp', [ "ngCookies" ]);
+	function myCtrl($scope, $http, $window, $cookies) {
+		$scope.users = function() {
+			$http(
+					{
+						method : 'GET',
+						url : 'http://localhost:8080/spring4mvc-security-rest-api/api/user/list'
+					}).then(function successCallback(response) {
+				console.log(response.data);
+				$window.alert(response.data);
+			}, function errorCallback(response) {
+				// called asynchronously if an error occurs
+				// or server returns response with an error status.
+			});
+		}
+		$scope.admins = function() {
+			var data = '';
+			var config = {
+				withCredentials : true,
+				crossDomain : true,
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+				}
+			};
+			$http
+					.post(
+							'http://localhost:8080/spring4mvc-security-rest-api/api/admin/list',
+							data, config).success(
+							function(data, status, header, config) {
+								$window.alert('admin list success');
+								var json = JSON.stringify(data)
+								$window.alert(json);
+							}).error(function(data, status, header, config) {
+						$window.alert('admin list fail, please login first.');
+					});
+		}
+		$scope.login = function() {
+			var data = 'username=admin&password=P@ssw0rd';
+			var config = {
+				withCredentials : true,
+				crossDomain : true,
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8;'
+				}
+			};
+			$http.post('http://localhost:8080/spring4mvc-security-rest-api/login',
+					data, config).success(
+					function(data, status, header, config) {
+						$window.alert('login success');
+						var json = JSON.stringify(data)
+						$window.alert(json);
+						$window.alert(data.JSESSIONID);
+						$cookies.JSESSIONID = data.JSESSIONID;
+						$scope.PostDataResponse = data;
+					}).error(function(data, status, header, config) {
+				$window.alert('login fail');
+			});
+		}
+	}
+</script>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="myCtrl">
+
+		<p>
+			<button ng-click="users()">User List</button>
+		</p>
+
+		<p>
+			<button ng-click="admins()">Admin List</button>
+		</p>
+
+		<ul>
+			<li>username: <strong>admin</strong></li>
+			<li>password: <strong>P@ssw0rd</strong></li>
+		</ul>
+
+		<p>
+			<button ng-click="login()">login for getting Cookie</button>
+		</p>
+
+	</div>
+</body>
+</html>
