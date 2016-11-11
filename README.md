@@ -1,5 +1,36 @@
 Spring Security - REST API
 ----------------
+### To set spring-security.xml
+
+1. HEADERS_FILTER
+
+```XML
+	<security:http auto-config="true" entry-point-ref="restAuthenticationEntryPoint">
+		<security:intercept-url pattern="/api/admin/**" access="hasRole('ROLE_ADMIN')" />
+		 	<security:form-login authentication-success-handler-ref="mySuccessHandler"
+			authentication-failure-handler-ref="myFailureHandler" />
+		<security:logout invalidate-session="true" />
+		<security:csrf disabled="true" />
+			<security:custom-filter ref="corsSource" before="HEADERS_FILTER" />
+	</security:http>
+```
+
+
+2. CorsFilter.java
+
+```XML
+	<bean id="corsSource" class="org.lucasko.filter.CorsFilter">
+		<constructor-arg name="origin" value="${URL_SERVER}" />
+		<constructor-arg name="methods" value="${cors_methods}" />
+		<constructor-arg name="headers" value="${cors_headers}" />
+		<constructor-arg name="maxAge" value="${cors_maxAge}" />
+		<constructor-arg name="credentials" value="${cors_credentials}" />
+	</bean>
+
+```
+
+
+
 
 ### Get data from REST API 
 Using curl to get json data.
