@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component("customAuthenticationFailureHandler")
 public class  myFailureHandler implements AuthenticationFailureHandler {
   
 

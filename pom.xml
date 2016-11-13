@@ -4,19 +4,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>lucasko</groupId>
 	<artifactId>spring4mvc-security-rest-api</artifactId>
-	<packaging>ejb</packaging>
+	<packaging>war</packaging>
 	<version>1.0.0</version>
-	<name>Spring CloudOrion-Web</name>
-
-
+	<name>Spring REST API</name>
 
 	<properties>
 		<context.path>spring4mvc-security-rest-api</context.path>
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<spring.security.version>4.0.4.RELEASE</spring.security.version>
 	</properties>
-
-
 	<dependencies>
 
 		<dependency>
@@ -69,6 +65,8 @@
 			<version>${spring.security.version}</version>
 		</dependency>
 
+
+		<!-- Others -->
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
@@ -79,6 +77,12 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.6</version>
 		</dependency>
 
 		<dependency>
@@ -93,12 +97,19 @@
 			<version>20160212</version>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.4</version>
+		</dependency>
+ 
 	</dependencies>
-	
-	
-	
+
+
+
+
 	<build>
 		<finalName>${pom.artifactId}</finalName>
 	</build>
-	
 </project>

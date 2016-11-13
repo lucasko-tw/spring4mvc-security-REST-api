@@ -21,13 +21,7 @@ public class mySuccessHandler implements AuthenticationSuccessHandler {
 			Authentication authentication) throws ServletException, IOException {
 		System.out.println("onAuthenticationSuccess");
 		try {
-			// System.out.println(authentication.getName());
-			// System.out.println(request.getRemoteAddr());
-			String username = authentication.getName();
-			//System.out.println("username:" + username);
-			// Token token = tokenservice.getToken(username);
-			//tokenService.renewAccessToken(username);
-			HttpSession session = request.getSession();
+		 	HttpSession session = request.getSession();
 	        User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	        session.setAttribute("username", authUser.getUsername());
 	        session.setAttribute("authorities", authentication.getAuthorities());

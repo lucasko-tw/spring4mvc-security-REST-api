@@ -1,9 +1,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -11,25 +11,28 @@
 			<value>/WEB-INF/config.properties</value>
 		</property>
 	</bean>
-	
 	<bean id="webexpressionHandler"
 		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 
-	
 
 	<security:http auto-config="true" entry-point-ref="restAuthenticationEntryPoint">
-		<security:intercept-url pattern="/api/admin/**" access="hasRole('ROLE_ADMIN')" />
-		 	<security:form-login authentication-success-handler-ref="mySuccessHandler"
+		<security:intercept-url pattern="/api/admin/**"
+			access="hasRole('ROLE_ADMIN')" />
+		<security:form-login
+			authentication-success-handler-ref="mySuccessHandler"
 			authentication-failure-handler-ref="myFailureHandler" />
+
+
 		<security:logout invalidate-session="true" />
 		<security:csrf disabled="true" />
-			<security:custom-filter ref="corsSource" before="HEADERS_FILTER" />
+
+		<security:custom-filter ref="corsSource"
+			before="HEADERS_FILTER" />
 	</security:http>
-	
-	
 
 	<bean id="mySuccessHandler" class="org.lucasko.handler.mySuccessHandler" />
 	<bean id="myFailureHandler" class="org.lucasko.handler.myFailureHandler" />
+	<bean id="restAuthenticationEntryPoint" class="org.lucasko.controller.restAuthenticationEntryPoint" />
 
 
 	<bean id="corsSource" class="org.lucasko.filter.CorsFilter">
@@ -41,8 +44,6 @@
 	</bean>
 
 
-
-	<bean id="restAuthenticationEntryPoint" class="org.lucasko.controller.restAuthenticationEntryPoint" />
 	<authentication-manager alias="authenticationManager"
 		xmlns="http://www.springframework.org/schema/security">
 		<authentication-provider>
@@ -51,7 +52,6 @@
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>
-
 
 
 </beans>
