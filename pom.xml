@@ -3,7 +3,7 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>lucasko</groupId>
-	<artifactId>CloudOrion-Web</artifactId>
+	<artifactId>spring4mvc-security-rest-api</artifactId>
 	<packaging>ejb</packaging>
 	<version>1.0.0</version>
 	<name>Spring CloudOrion-Web</name>
@@ -11,7 +11,7 @@
 
 
 	<properties>
-		<context.path>spring4mvc-security-REST-api</context.path>
+		<context.path>spring4mvc-security-rest-api</context.path>
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<spring.security.version>4.0.4.RELEASE</spring.security.version>
 	</properties>
